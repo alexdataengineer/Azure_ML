@@ -1,0 +1,17 @@
+{
+	"name": "AzureMLService1",
+	"properties": {
+		"annotations": [],
+		"type": "AzureMLService",
+		"typeProperties": {
+			"subscriptionId": "c13fe431-45c7-45ed-aafb-780b48928c18",
+			"resourceGroupName": "datateam",
+			"mlWorkspaceName": "datateam",
+			"authentication": "MSI"
+		},
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
