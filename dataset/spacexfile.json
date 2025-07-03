@@ -1,0 +1,19 @@
+{
+	"name": "spacexfile",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Ls_spacex_http",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": "launches/latest"
+			}
+		},
+		"schema": {}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

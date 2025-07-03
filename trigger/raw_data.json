@@ -1,0 +1,17 @@
+{
+	"name": "raw_data",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Hour",
+				"interval": 5,
+				"startTime": "2025-06-28T03:26:00Z",
+				"timeZone": "UTC"
+			}
+		}
+	}
+}

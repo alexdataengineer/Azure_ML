@@ -1,0 +1,17 @@
+{
+	"name": "external_table_report_worldbank_populacao_por_decada",
+	"properties": {
+		"content": {
+			"query": "CREATE EXTERNAL DATA SOURCE ds_lakeiq_gold\nWITH (\n    LOCATION = 'abfss://gold@lakeiqbetim.dfs.core.windows.net/'\n);\n\nCREATE EXTERNAL FILE FORMAT parquet_format\nWITH (\n    FORMAT_TYPE = PARQUET\n);\n\nCREATE EXTERNAL TABLE dbo.worldbank_populacao_por_decada (\n    pais NVARCHAR(100),\n    decada INT,\n    anos_disponiveis INT,\n    media_populacional_decada BIGINT,\n    populacao_maxima_decada BIGINT,\n    populacao_minima_decada BIGINT\n)\nWITH (\n    LOCATION = 'worldbank_populacao_por_decada/',\n    DATA_SOURCE = ds_lakeiq_gold,\n    FILE_FORMAT = parquet_format\n);\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "worldbank_db",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

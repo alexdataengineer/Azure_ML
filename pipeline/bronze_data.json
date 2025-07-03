@@ -1,0 +1,64 @@
+{
+	"name": "bronze_data",
+	"properties": {
+		"activities": [
+			{
+				"name": "Extract_Data_From_Source",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "RestSource",
+						"httpRequestTimeout": "00:01:40",
+						"requestInterval": "00.00:00:00.010",
+						"requestMethod": "GET",
+						"paginationRules": {
+							"supportRFC5988": "true"
+						}
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings",
+							"copyBehavior": "FlattenHierarchy"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings",
+							"filePattern": {
+								"value": "worldbank_@{formatDateTime(utcNow(),'yyyyMMdd_HHmmss')}.json\n",
+								"type": "Expression"
+							}
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "RestResource1",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Json1",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "bronze_folder"
+		},
+		"annotations": [],
+		"lastPublishTime": "2025-06-29T03:54:09Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

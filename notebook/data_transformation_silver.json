@@ -1,0 +1,77 @@
+{
+	"name": "data_transformation_silver",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "smalsize",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"runAsWorkspaceSystemIdentity": false,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "0064ba0d-d93b-4278-a991-dfd44f7e6e5d"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"enableDebugMode": false,
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/c13fe431-45c7-45ed-aafb-780b48928c18/resourceGroups/new_recurse_service/providers/Microsoft.Synapse/workspaces/alex2026/bigDataPools/smalsize",
+				"name": "smalsize",
+				"type": "Spark",
+				"endpoint": "https://alex2026.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/smalsize",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net",
+					"authHeader": null
+				},
+				"sparkVersion": "3.4",
+				"nodeCount": 10,
+				"cores": 4,
+				"memory": 28,
+				"extraHeader": null
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"source": [
+					"bronze_path = \"abfss://bronze@lakeiqbetim.dfs.core.windows.net/apidata/newfiles\"\n",
+					"df_raw = spark.read.option(\"multiline\", \"false\").json(bronze_path)\n",
+					"df_filtered = df_raw.filter(\"country IS NOT NULL\")\n",
+					"\n",
+					"df_silver = (\n",
+					"    df_filtered.selectExpr(\n",
+					"         \"country.value as pais\",\n",
+					"        \"countryiso3code as iso3\",\n",
+					"        \"CAST(date AS INT) as ano\",\n",
+					"        \"CAST(value AS BIGINT) as populacao_total\"\n",
+					"    ).filter(\"populacao_total IS NOT NULL\")\n",
+					")\n",
+					"df_silver.show(10, truncate=False)"
+				],
+				"execution_count": 2
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"df_silver.write.mode(\"overwrite\").parquet(\"abfss://silver@lakeiqbetim.dfs.core.windows.net/worldbank_populacao/\")"
+				],
+				"execution_count": 4
+			}
+		]
+	}
+}
