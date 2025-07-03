@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"workspaceName": {
+			"value": "alex2026"
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"alex2026-WorkspaceDefaultSqlServer_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:alex2026.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
+		},
+		"API_work_bank_API_properties_typeProperties_url": {
+			"value": "https://api.worldbank.org/v2/"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://lakeiqbetim.dfs.core.windows.net/"
+		},
+		"Ls_spacex_http_properties_typeProperties_url": {
+			"value": "https://api.spacexdata.com/v4/"
+		},
+		"alex2026-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://lakeiqbetim.dfs.core.windows.net"
+		},
+		"HttpServer1_properties_typeProperties_url": {
+			"value": "https://api.coingecko.com/api/v3/"
+		}
+	}
+}
