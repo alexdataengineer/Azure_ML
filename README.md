@@ -40,6 +40,7 @@ This project implements a complete **machine learning pipeline for predicting cr
 │ • No schema     │    │ • Parquet format│    │ • Business logic│
 └─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
+![Uploading image.png…]()
 
 ### Pipeline Components
 1. **Data Ingestion (Bronze)**: CoinGecko API → Azure Data Lake Gen2
