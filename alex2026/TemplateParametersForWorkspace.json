@@ -25,6 +25,12 @@
 		},
 		"HttpServer1_properties_typeProperties_url": {
 			"value": "https://api.coingecko.com/api/v3/"
+		},
+		"AzureMLService1_properties_typeProperties_subscriptionId": {
+			"value": "c13fe431-45c7-45ed-aafb-780b48928c18"
+		},
+		"AzureMLService1_properties_typeProperties_resourceGroupName": {
+			"value": "datateam"
 		}
 	}
 }
