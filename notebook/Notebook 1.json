@@ -1,0 +1,97 @@
+{
+	"name": "Notebook 1",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "smalsize",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "b56408ca-fc4a-45e2-9431-aebe26043e04"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/c13fe431-45c7-45ed-aafb-780b48928c18/resourceGroups/new_recurse_service/providers/Microsoft.Synapse/workspaces/alex2026/bigDataPools/smalsize",
+				"name": "smalsize",
+				"type": "Spark",
+				"endpoint": "https://alex2026.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/smalsize",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net"
+				},
+				"sparkVersion": "3.4",
+				"nodeCount": 10,
+				"cores": 4,
+				"memory": 28,
+				"automaticScaleJobs": false
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"source": [
+					"from pyspark.sql.functions import col"
+				],
+				"execution_count": 3
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"df_bronze = spark.read.json(\"abfss://bronze@lakeiqbetim.dfs.core.windows.net/coins/\")\n",
+					"df_bronze.printSchema()"
+				],
+				"execution_count": 2
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"df_ml = df_bronze.select(\n",
+					"    \"id\",\n",
+					"    \"symbol\",\n",
+					"    \"market_cap\",\n",
+					"    \"total_volume\",\n",
+					"    \"price_change_percentage_24h\",\n",
+					"    \"circulating_supply\",\n",
+					"    \"current_price\"\n",
+					")"
+				],
+				"execution_count": 4
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"df_ml = df_ml.dropna()"
+				],
+				"execution_count": 5
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"df_ml.write.mode(\"overwrite\").parquet(\"abfss://silver@lakeiqbetim.dfs.core.windows.net/coins/ml_ready/\")"
+				],
+				"execution_count": 6
+			}
+		]
+	}
+}
