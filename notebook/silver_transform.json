@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "0e78d333-3c21-4908-9f6e-1c5539db3641"
+				"spark.autotune.trackingId": "3abd47c2-b1dc-4a75-8834-175d4675f892"
 			}
 		},
 		"metadata": {
@@ -53,7 +53,7 @@
 				"source": [
 					"from pyspark.sql.functions import col"
 				],
-				"execution_count": 3
+				"execution_count": 7
 			},
 			{
 				"cell_type": "code",
@@ -61,7 +61,7 @@
 					"df_bronze = spark.read.json(\"abfss://bronze@lakeiqbetim.dfs.core.windows.net/coins/\")\n",
 					"df_bronze.printSchema()"
 				],
-				"execution_count": 2
+				"execution_count": 8
 			},
 			{
 				"cell_type": "code",
@@ -76,21 +76,21 @@
 					"    \"current_price\"\n",
 					")"
 				],
-				"execution_count": 4
+				"execution_count": 9
 			},
 			{
 				"cell_type": "code",
 				"source": [
 					"df_ml = df_ml.dropna()"
 				],
-				"execution_count": 5
+				"execution_count": 10
 			},
 			{
 				"cell_type": "code",
 				"source": [
 					"df_ml.write.mode(\"overwrite\").parquet(\"abfss://silver@lakeiqbetim.dfs.core.windows.net/coins/ml_ready/\")"
 				],
-				"execution_count": 6
+				"execution_count": 11
 			}
 		]
 	}
