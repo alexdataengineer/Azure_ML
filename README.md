@@ -233,18 +233,3 @@ Top features by importance:
 
 ---
 
-## 🤝 Contributing
-
-### Development Guidelines
-1. **Follow the Medallion architecture** pattern
-2. **Use consistent naming** conventions
-3. **Document all changes** in notebooks
-4. **Test pipelines** before deployment
-5. **Monitor model performance** regularly
-
-### Code Standards
-- Python: PEP 8 compliance
-- JSON: Proper formatting and validation
-- Documentation: Clear and comprehensive
-- Testing: Unit tests for critical functions
-
